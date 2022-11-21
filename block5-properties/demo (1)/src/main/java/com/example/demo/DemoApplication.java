@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class DemoApplication {
+
 	public static void main(String[] args) {
+		System.setProperty("new.property", "funciona");
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
@@ -19,6 +21,7 @@ public class DemoApplication {
 		@Value("${greeting}") private String nombre;
 		@Value("${myNumber}") private String numero;
 		@Value("${new.property}") private String newProperty;
+
 
 
 		@Override public void run(String... args) throws Exception {

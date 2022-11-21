@@ -1,0 +1,13 @@
+1632 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1667 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1631 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1748 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1631 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1743 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1686 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+1686 [main] ERROR logging.MainController - Mensaje a nivel de ERROR
+2022-11-21 17:56:01,933 ERROR [main] l.MainController [MainController.java:22] Mensaje a nivel de ERROR
+2022-11-21 17:56:40,160 ERROR [main] l.MainController [MainController.java:22] Mensaje a nivel de ERROR
+2022-11-21 17:57:04,657 ERROR [main] l.MainController [MainController.java:22] Mensaje a nivel de ERROR
+2022-11-21 17:57:28,054 ERROR [main] l.MainController [MainController.java:22] Mensaje a nivel de ERROR
+2022-11-21 18:02:09,228 ERROR [main] l.MainController [MainController.java:22] Mensaje a nivel de ERROR
