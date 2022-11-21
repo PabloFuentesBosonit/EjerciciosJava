@@ -34,6 +34,29 @@ public class DemoApplication {
 			System.out.println("Hola desde la clase tercera");
 		}
 	};
+
+	/* Modificar la tercera funcion para que imprima los valores pasados como parámetro
+
+	@Bean
+	public class Saludo {
+		protected String s1 = "Soy la";
+		protected String s2 = "tercera clase";
+	}
+
+	@Bean public String get1(){
+		return s1;
+	}
+
+	@Bean public String get2(){
+		return s2;
+	}
+
+	Override
+	public void run(String...args) throws Exception{
+		System.out.println(s1 + s2);
+	};
+
+	*/
 }
 
 
