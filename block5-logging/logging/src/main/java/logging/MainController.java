@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Component
 @RestController
-@CommonsLog
+@CommonsLog // te muestra los errores que puede tener el codigo
 public class MainController {
     @Bean
     public String index() {
