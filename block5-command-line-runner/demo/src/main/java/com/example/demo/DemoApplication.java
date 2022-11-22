@@ -17,9 +17,9 @@ public class DemoApplication {
 	@PostConstruct // Es el primero e implementa en las dependencias
 	private void springPostConstruct(){
 		System.out.println("Hola desde la clase inicial");
-	};
+	}
 
-	@Bean// anotacion que pones a metodos cuando inicias y configuracion
+    @Bean// anotacion que pones a metodos cuando inicias y configuracion
 	CommandLineRunner segunda(){
 		return p -> {
 			System.out.println("Hola desde la clase segunda");
@@ -33,7 +33,7 @@ public class DemoApplication {
 		public void run(String...args) throws Exception{
 			System.out.println("Hola desde la clase tercera");
 		}
-	};
+	}
 
 	/* Modificar la tercera funcion para que imprima los valores pasados como parámetro
 

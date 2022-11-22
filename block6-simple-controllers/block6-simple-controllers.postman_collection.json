@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "36444f5e-d5d7-443d-81bb-76c1e6f89b21",
+		"name": "block6-simple-controllers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/user/Pablo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo\",\r\n    \"age\": 28,\r\n    \"town\": \"Granada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/Pablo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"Pablo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/useradd",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo\",\r\n    \"age\": 28,\r\n    \"town\": \"Granada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/useradd",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"useradd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
