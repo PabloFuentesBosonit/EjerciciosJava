@@ -15,6 +15,7 @@
         <module name="logging" />
         <module name="Downloads" />
         <module name="block6-simple-controllers" />
+        <module name="block6-person-controllers" />
         <module name="block3-maven-package" />
         <module name="demo" />
       </profile>
@@ -33,6 +34,7 @@
       <module name="1" options="-parameters" />
       <module name="Downloads" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
+      <module name="block6-person-controllers" options="-parameters" />
       <module name="block6-simple-controllers" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="demo (1)" options="-parameters" />
