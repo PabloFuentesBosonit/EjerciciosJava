@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
     @GetMapping("/addPersona")
     public Persona crearPersona (@RequestHeader(value="name")String name, @RequestHeader(value="age")int age,
                                  @RequestHeader(value="town")String town){
+
         return servicio.createPersona(name,age,town);
     }
 

@@ -1,38 +1,18 @@
 package com.example.block6personcontrollers;
 
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class Servicio {
+public interface Servicio {
+    Persona persona = new Persona();
 
-    public Persona persona = new Persona();
+    Persona createPersona(String name,int age, String town);
 
-    public Persona createPersona(String name,int age, String town){
-        persona.setName(name);
-        persona.setAge(age);
-        persona.setTown(town);
-        return persona;
-    }
+    Persona doblarEdad(String name,int age, String town);
 
-    public Persona doblarEdad(String name,int age, String town){
-        persona.setName(name);
-        persona.setAge(age * 2);
-        persona.setTown(town);
-        return persona;
-    }
+    List<Ciudad> towns = new ArrayList<>();
 
-    public List<Ciudad> towns = new ArrayList<>();
+    void anadirCiudad(Ciudad info);
 
-    public void anadirCiudad(Ciudad info){
-        towns.add(info);
-    }
-
-    public List<Ciudad> mostrarCiudades() {
-        return towns;
-    }
+    List<Ciudad> mostrarCiudades();
 }
-
-
