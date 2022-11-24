@@ -1,5 +1,6 @@
-package com.example.block6personcontrollers;
+package com.example.block6personcontrollers.controladores;
 
+import com.example.block6personcontrollers.clases.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.example.block6personcontrollers;
+package com.example.block6personcontrollers.clases;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,5 @@
 package com.example.block6personcontrollers;
+import com.example.block6personcontrollers.clases.Persona;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,7 @@
-package com.example.block6personcontrollers;
+package com.example.block6personcontrollers.services;
+
+import com.example.block6personcontrollers.clases.Ciudad;
+import com.example.block6personcontrollers.clases.Persona;
 
 import java.util.ArrayList;
 import java.util.List;
