@@ -10,4 +10,5 @@ public interface PersonService {
     void deletePersonById(int id);
     Iterable<PersonOutputDto> getAllPersons (int pageNumber, int pageSize);
     PersonOutputDto updatePerson(PersonInputDto person, int id) throws Exception;
+    PersonOutputDto getPersonByName(String name);
 }

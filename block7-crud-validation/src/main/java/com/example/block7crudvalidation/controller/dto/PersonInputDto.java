@@ -1,7 +1,10 @@
 package com.example.block7crudvalidation.controller.dto;
 
+import lombok.Data;
+
 
 import java.net.URL;
+@Data
 
 public class PersonInputDto {
     private String user;

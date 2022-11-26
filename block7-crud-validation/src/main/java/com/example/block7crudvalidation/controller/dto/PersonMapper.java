@@ -3,6 +3,7 @@ package com.example.block7crudvalidation.controller.dto;
 import com.example.block7crudvalidation.domain.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Service;
 
 @Mapper
 public interface PersonMapper {

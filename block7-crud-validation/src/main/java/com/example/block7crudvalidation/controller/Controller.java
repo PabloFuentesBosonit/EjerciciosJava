@@ -15,8 +15,6 @@ public class Controller {
     @Autowired
     PersonService personService;
 
-    //No le llega lo del request body
-
     @PostMapping
     public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto person) {
         return ResponseEntity.ok(personService.addPerson(person));
@@ -30,6 +28,16 @@ public class Controller {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/user/{name}")
+    public ResponseEntity<PersonOutputDto> getPersonByName(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok().body(personService.getPersonByName(name));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @DeleteMapping
     public ResponseEntity<String> deletePersonById(@RequestParam int id) {

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,6 +30,12 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public PersonOutputDto getPersonById(int id) {
         Optional<Person> person = personRepository.findById(id);
+        return PersonMapper.Instance.personToPersonOutputDTO(person.get());
+    }
+
+    @Override
+    public PersonOutputDto getPersonByName(String name) {
+        Optional<Person> person = personRepository.findByName(name);
         return PersonMapper.Instance.personToPersonOutputDTO(person.get());
     }
 

@@ -1,7 +1,11 @@
 package com.example.block7crudvalidation.controller.dto;
 
+import lombok.Data;
+
 import java.net.URL;
 import java.util.Date;
+
+@Data
 
 public class PersonOutputDto {
     private int id;

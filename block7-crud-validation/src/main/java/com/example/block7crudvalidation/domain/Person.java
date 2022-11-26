@@ -1,20 +1,21 @@
 package com.example.block7crudvalidation.domain;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
 
 import javax.persistence.*;
 import java.net.URL;
 import java.util.Date;
 
-@RequiredArgsConstructor
-@Entity
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Entity
 @Table(name = "Person")
 public class Person {
     @Id
