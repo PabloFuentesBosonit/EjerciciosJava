@@ -4,6 +4,7 @@ import com.example.block7crudvalidation.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation.controller.dto.PersonMapper;
 import com.example.block7crudvalidation.controller.dto.PersonOutputDto;
 import com.example.block7crudvalidation.domain.Person;
+import com.example.block7crudvalidation.exception.UnprocessableEntityException;
 import com.example.block7crudvalidation.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -53,12 +54,12 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public PersonOutputDto updatePerson(PersonInputDto person, int id) throws Exception {
+    public PersonOutputDto updatePerson(PersonInputDto person, int id) throws UnprocessableEntityException {
         Optional<Person> personaDb = personRepository.findById(id);
         Person personInput = PersonMapper.Instance.personInputDTOToPerson(person);
         Boolean isEqual = Objects.equals(personaDb, personInput);
         if(isEqual){
-            throw new Exception("Son iguales");
+            throw new UnprocessableEntityException("Los campos introducidos no son compatibles");
         }
         personRepository.save(personInput);
         return PersonMapper.Instance.personToPersonOutputDTO(personInput);
