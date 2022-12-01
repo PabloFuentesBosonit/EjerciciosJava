@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class SubjectOutputDto {
     int id_subject;
-    List<StudentOutputDto> students;
+    List<StudentOutputDto> studentsSubject;
     String subjectName;
     String comment;
     Date initial_date;

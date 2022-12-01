@@ -1,5 +1,8 @@
 package com.example.block7crudvalidation.student.application;
 
+import com.example.block7crudvalidation.profesor.controller.dto.ProfesorMapper;
+import com.example.block7crudvalidation.profesor.controller.dto.ProfesorOutputDto;
+import com.example.block7crudvalidation.profesor.domain.Profesor;
 import com.example.block7crudvalidation.student.controller.dto.StudentMapper;
 import com.example.block7crudvalidation.student.repository.StudentRepository;
 import com.example.block7crudvalidation.student.controller.dto.StudentInputDto;
@@ -51,22 +54,40 @@ public class StudentServiceImpl implements StudentService{
 
 
         StudentOutputDto response = StudentMapper.Instance.studentToStudentOutputDTO(studentDb);
-        response.setSubjects(asignaturasOutput);
+        response.setSubjectStudent(asignaturasOutput);
         return response;
     }
 
 
     @Override
     public StudentOutputDto getStudentById(int id) {
-        Optional<Student> student = studentRepository.findById(id);
-        return StudentMapper.Instance.studentToStudentOutputDTO(student.get());
+        Student student = studentRepository.findById(id).orElseThrow();
+        List<SubjectOutputDto> asignaturasOutput = student.getSubjectStudent()
+                .stream()
+                .map(SubjectMapper.Instance::subjectToSubjectOutputDTO).toList();
+
+        StudentOutputDto response = StudentMapper.Instance.studentToStudentOutputDTO(student);
+        response.setSubjectStudent(asignaturasOutput);
+        return response;
     }
+
+
 
     @Override
     public void deleteStudentById(int id) {
-        studentRepository.findById(id).orElseThrow();
+        Student student = studentRepository.findById(id).orElseThrow();
+        if(student.getSubjectStudent() != null){
+            student.getSubjectStudent()
+                    .stream()
+                    .forEach(subject -> subject.setStudentsSubject(null));
+            student.setSubjectStudent(null);
+            studentRepository.save(student);
+        }
         studentRepository.deleteById(id);
     }
+
+
+
     @Override
     public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
@@ -74,6 +95,19 @@ public class StudentServiceImpl implements StudentService{
                 .stream()
                 .map(student -> StudentMapper.Instance.studentToStudentOutputDTO(student)).toList();
     }
+
+    // mostrar todos las asignaturas de un estudiante
+    @Override
+    public List<SubjectOutputDto> allSubjectToStudent(int id){
+        Student student = studentRepository.findById(id).orElseThrow();
+        List<SubjectOutputDto> lista = student.getSubjectStudent()
+                .stream()
+                .map(SubjectMapper.Instance::subjectToSubjectOutputDTO).toList();
+        return lista;
+    }
+
+
+
     @Override
     public StudentOutputDto updateStudent(StudentInputDto student, int id) throws Exception {
         Optional<Student> studentDb = studentRepository.findById(id);

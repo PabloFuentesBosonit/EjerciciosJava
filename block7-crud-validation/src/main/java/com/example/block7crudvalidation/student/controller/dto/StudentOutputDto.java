@@ -14,7 +14,7 @@ import java.util.List;
 public class StudentOutputDto {
     int id_student;
     PersonOutputDto person;
-    List<SubjectOutputDto> subjects;
+    List<SubjectOutputDto> subjectStudent;
     int numHours;
     String comments;
     String branch;

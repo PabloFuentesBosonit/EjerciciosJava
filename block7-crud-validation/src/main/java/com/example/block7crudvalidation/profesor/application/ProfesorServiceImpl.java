@@ -1,5 +1,6 @@
 package com.example.block7crudvalidation.profesor.application;
 
+import com.example.block7crudvalidation.profesor.controller.dto.ProfesorSimpleOutputDto;
 import com.example.block7crudvalidation.profesor.domain.Profesor;
 import com.example.block7crudvalidation.profesor.controller.dto.ProfesorInputDto;
 import com.example.block7crudvalidation.profesor.controller.dto.ProfesorMapper;
@@ -45,12 +46,12 @@ public class ProfesorServiceImpl implements ProfesorService {
         studentRepository.save(studentDb);
         profesorRepository.save(profesorDb);
 
-        List<StudentOutputDto> estudiantesOutput = profesorDb.getStudentsProfesor()
+        List<StudentOutputDto> estudiantesOut = profesorDb.getStudentsProfesor()
                 .stream()
                 .map(StudentMapper.Instance::studentToStudentOutputDTO).toList();
 
         ProfesorOutputDto response = ProfesorMapper.Instance.profesorToProfesorOutputDTO(profesorDb);
-        response.setStudents(estudiantesOutput);
+        response.setStudent(estudiantesOut);
         return response;
     }
 
@@ -62,15 +63,28 @@ public class ProfesorServiceImpl implements ProfesorService {
                 .map(StudentMapper.Instance::studentToStudentOutputDTO).toList();
 
         ProfesorOutputDto response = ProfesorMapper.Instance.profesorToProfesorOutputDTO(profesor);
-        response.setStudents(estudianteOutput);
+        response.setStudent(estudianteOutput);
+        return response;
+    }
+
+    @Override
+    public ProfesorSimpleOutputDto getProfesorSimpleById(int id) {
+        Profesor profesor = profesorRepository.findById(id).orElseThrow();
+        ProfesorSimpleOutputDto response = ProfesorMapper.Instance.profesorToProfesorSimpleOutputDTO(profesor);
         return response;
     }
 
     @Override
     public void deleteProfesorById(int id) {
-        profesorRepository.findById(id).orElseThrow();
+        Profesor profesor = profesorRepository.findById(id).orElseThrow();
+        if(profesor.getStudentsProfesor() != null){
+            profesor.getStudentsProfesor()
+                   .stream()
+                   .forEach(student -> student.setProfesor(null));
+            profesor.setStudentsProfesor(null);
+            profesorRepository.save(profesor);
+        }
         profesorRepository.deleteById(id);
-
     }
 
     @Override
@@ -90,6 +104,7 @@ public class ProfesorServiceImpl implements ProfesorService {
                 .map(StudentMapper.Instance::studentToStudentOutputDTO).toList();
         return lista;
     }
+
 
 
 

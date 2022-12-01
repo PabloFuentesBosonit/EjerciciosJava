@@ -2,8 +2,8 @@ package com.example.block7crudvalidation.profesor.application;
 
 import com.example.block7crudvalidation.profesor.controller.dto.ProfesorInputDto;
 import com.example.block7crudvalidation.profesor.controller.dto.ProfesorOutputDto;
+import com.example.block7crudvalidation.profesor.controller.dto.ProfesorSimpleOutputDto;
 import com.example.block7crudvalidation.student.controller.dto.StudentOutputDto;
-import com.example.block7crudvalidation.student.domain.Student;
 
 import java.util.List;
 
@@ -17,4 +17,6 @@ public interface ProfesorService {
     ProfesorOutputDto addStudentToProfesor(int student_id, int profesor_id);
 
     List<StudentOutputDto> allStudentToProfesor(int id);
+
+    ProfesorSimpleOutputDto getProfesorSimpleById(int id);
 }

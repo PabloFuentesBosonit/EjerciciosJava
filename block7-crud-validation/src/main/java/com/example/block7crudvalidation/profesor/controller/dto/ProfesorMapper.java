@@ -12,4 +12,5 @@ public interface ProfesorMapper {
 
     Profesor profesorInputDTOToProfesor(ProfesorInputDto profesorInputDto);
 
+    ProfesorSimpleOutputDto profesorToProfesorSimpleOutputDTO(Profesor profesor);
 }

@@ -1,11 +1,14 @@
 package com.example.block7crudvalidation.subject.controller;
 
+import com.example.block7crudvalidation.student.controller.dto.StudentOutputDto;
 import com.example.block7crudvalidation.subject.application.SubjectService;
 import com.example.block7crudvalidation.subject.controller.dto.SubjectInputDto;
 import com.example.block7crudvalidation.subject.controller.dto.SubjectOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/subject")
@@ -40,6 +43,12 @@ public class SubjectController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    //mostrar todos los estudiantes de una asignatura
+    @GetMapping("/estudiantes/{id}")
+    public List<StudentOutputDto> allStudentToSubject(@PathVariable int id){
+        return subjectService.allStudentToSubject(id);
     }
 
 

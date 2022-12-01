@@ -16,24 +16,19 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "subjects")
+@Table(name = "Asignaturas")
 public class Subject {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
         @Column(name = "id_subject", nullable = false)
         private int id_subject;
-        // @ManyToOne(fetch = FetchType.LAZY)
-       // @JoinColumn(name = "id_profesor")
-       // Profesor profesor;
-       // @ManyToOne(cascade = CascadeType.ALL)
-       // @JoinColumn(name = "id_student")
-       // Student student;
+
         @ManyToMany
-        @JoinTable(name = "student_subject")
+        @JoinTable(name = "studentSubject")
         @ToString.Exclude
         List<Student> studentsSubject = new ArrayList<>();
 
-        @Column(name = "subject")
+        @Column(name = "subjectName")
         String subjectName;
         @Column(name = "comentarios")
         String comment;

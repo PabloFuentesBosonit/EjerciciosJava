@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -32,7 +31,7 @@ public class SubjectServiceImpl implements SubjectService {
         return SubjectMapper.Instance.subjectToSubjectOutputDTO(asignaturaDb);
     }
 
-    //añadir estudiante a asignatura
+    //Añadir estudiante a asignatura
     @Override
     public SubjectOutputDto addStudentToSubject(int student_id, int subject_id){
         Student studentDb = studentRepository.findById(student_id).orElseThrow();
@@ -50,20 +49,33 @@ public class SubjectServiceImpl implements SubjectService {
 
 
         SubjectOutputDto response = SubjectMapper.Instance.subjectToSubjectOutputDTO(subjectDb);
-        response.setStudents(asignaturasOutput);
+        response.setStudentsSubject(asignaturasOutput);
         return response;
     }
 
     @Override
     public SubjectOutputDto getSubjectById(int id) {
-        Optional<Subject> subject = subjectRepository.findById(id);
-        return SubjectMapper.Instance.subjectToSubjectOutputDTO(subject.get());
+        Subject subject = subjectRepository.findById(id).orElseThrow();
+        List<StudentOutputDto> estudiantesOutput = subject.getStudentsSubject()
+                .stream()
+                .map(StudentMapper.Instance::studentToStudentOutputDTO).toList();
+
+        SubjectOutputDto response = SubjectMapper.Instance.subjectToSubjectOutputDTO(subject);
+        response.setStudentsSubject(estudiantesOutput);
+        return response;
     }
 
     @Override
     public void deleteSubjectById(int id) {
-        subjectRepository.findById(id).orElseThrow();
-        subjectRepository.deleteById(id);
+        Subject subject = subjectRepository.findById(id).orElseThrow();
+        if(subject.getStudentsSubject() != null){
+            subject.getStudentsSubject()
+                    .stream()
+                    .forEach(student -> student.setSubjectStudent(null));
+            subject.setStudentsSubject(null);
+            subjectRepository.save(subject);
+        }
+        studentRepository.deleteById(id);
     }
 
     @Override
@@ -74,13 +86,23 @@ public class SubjectServiceImpl implements SubjectService {
                 .map(subject -> SubjectMapper.Instance.subjectToSubjectOutputDTO(subject)).toList();
     }
 
+    // Mostrar todos las asignaturas de un estudiante
+    @Override
+    public List<StudentOutputDto> allStudentToSubject(int id){
+        Subject subject = subjectRepository.findById(id).orElseThrow();
+        List<StudentOutputDto> lista = subject.getStudentsSubject()
+                .stream()
+                .map(StudentMapper.Instance::studentToStudentOutputDTO).toList();
+        return lista;
+    }
+
     @Override
     public SubjectOutputDto updateSubject(SubjectInputDto subject, int id) throws Exception {
-        Optional<Subject> subjectDb = subjectRepository.findById(id);
+        Subject subjectDb = subjectRepository.findById(id).orElseThrow();
         Subject subjectInput = SubjectMapper.Instance.subjectInputDTOToSubject(subject);
         Boolean isEqual = Objects.equals(subjectDb, subjectInput);
         if(isEqual){
-            throw new Exception();
+            throw new Exception("No hay ningún cambio");
         }
         subjectRepository.save(subjectInput);
         return SubjectMapper.Instance.subjectToSubjectOutputDTO(subjectInput);

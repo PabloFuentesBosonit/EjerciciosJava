@@ -29,7 +29,7 @@ public class Student {
     Profesor profesor;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "subject")
+    @JoinTable(name = "subjectStudent")
     @ToString.Exclude
     List<Subject> subjectStudent = new ArrayList<>();
 

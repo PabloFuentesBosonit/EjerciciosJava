@@ -3,9 +3,12 @@ package com.example.block7crudvalidation.student.controller;
 import com.example.block7crudvalidation.student.application.StudentService;
 import com.example.block7crudvalidation.student.controller.dto.StudentInputDto;
 import com.example.block7crudvalidation.student.controller.dto.StudentOutputDto;
+import com.example.block7crudvalidation.subject.controller.dto.SubjectOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -36,6 +39,12 @@ public class StudentController{
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    //mostrar todos las asignaturas de un estudiante
+    @GetMapping("/asignaturas/{id}")
+    public List<SubjectOutputDto> allSubjectToStudent(@PathVariable int id){
+        return studentService.allSubjectToStudent(id);
     }
 
     @DeleteMapping

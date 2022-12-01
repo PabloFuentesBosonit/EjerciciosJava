@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/profesor")
@@ -32,12 +33,14 @@ public class ProfesorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfesorOutputDto> getProfesorById(@PathVariable int id){
-        try{
-            return ResponseEntity.ok().body(profesorService.getProfesorById(id));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+    public Optional<?> getProfesorById(@PathVariable int id, @RequestParam(required = false) String
+    outputType){
+        if(outputType.equals("full")){
+            return Optional.ofNullable(profesorService.getProfesorById(id));
+        } else if (outputType.equals("simple")){
+            return Optional.ofNullable(profesorService.getProfesorSimpleById(id));
         }
+       return Optional.ofNullable(profesorService.getProfesorSimpleById(id));
     }
 
     //mostrar todos los estudiantes de un profesor
@@ -47,11 +50,12 @@ public class ProfesorController {
     }
 
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteProfesorById(@RequestParam int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProfesorById(@PathVariable int id) {
         try {
             profesorService.deleteProfesorById(id);
             return ResponseEntity.ok().body("profesor with id "+id+" was deleted");
+            //Lo que quieras proteger lo tienes que poner en null, si esos estudiantes lo tienes que pasar a null
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

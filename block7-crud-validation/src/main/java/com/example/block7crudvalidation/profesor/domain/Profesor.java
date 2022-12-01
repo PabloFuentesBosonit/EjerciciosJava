@@ -32,5 +32,6 @@ public class Profesor {
     @Column(name = "brand")
     String brand;
 
+
 }
 
