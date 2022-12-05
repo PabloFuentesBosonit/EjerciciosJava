@@ -5,9 +5,12 @@ import com.example.block7crudvalidation.student.controller.dto.StudentInputDto;
 import com.example.block7crudvalidation.student.controller.dto.StudentOutputDto;
 import com.example.block7crudvalidation.subject.controller.dto.SubjectOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URL;
 import java.util.List;
 
 @RestController
@@ -31,6 +34,17 @@ public class StudentController{
             return null;
         }
     }
+
+    @GetMapping("/template/{id}")
+    public StudentOutputDto getStudentByIdTemplate(@PathVariable int id) {
+        ResponseEntity<StudentOutputDto> template =  new RestTemplate().getForEntity("http://localhost:8080/student/"+id,
+                StudentOutputDto.class);
+
+            if (template.getStatusCode()== HttpStatus.ACCEPTED.OK)
+                return template.getBody();
+            throw new RuntimeException("The server didn't respond OK");
+        }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable int id) {

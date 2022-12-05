@@ -1,8 +1,5 @@
 package com.example.block7crudvalidation.student.application;
 
-import com.example.block7crudvalidation.profesor.controller.dto.ProfesorMapper;
-import com.example.block7crudvalidation.profesor.controller.dto.ProfesorOutputDto;
-import com.example.block7crudvalidation.profesor.domain.Profesor;
 import com.example.block7crudvalidation.student.controller.dto.StudentMapper;
 import com.example.block7crudvalidation.student.repository.StudentRepository;
 import com.example.block7crudvalidation.student.controller.dto.StudentInputDto;

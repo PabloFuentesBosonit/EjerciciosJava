@@ -47,6 +47,7 @@ public class ProfesorController {
     @GetMapping("/estudiantes/{id}")
     public List<StudentOutputDto> allStudentToProfesor(@PathVariable int id){
         return profesorService.allStudentToProfesor(id);
+
     }
 
 
