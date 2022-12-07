@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  postgresql:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=contrasena
+      - POSTGRES_DB=test
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+  block10-dockerize-app:
+    image: myapp
+    networks:
+      - mynetwork
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+networks:
+  mynetwork:
+    driver: bridge

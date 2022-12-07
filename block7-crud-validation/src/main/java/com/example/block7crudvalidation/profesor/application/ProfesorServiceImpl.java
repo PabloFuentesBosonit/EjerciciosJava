@@ -106,18 +106,15 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
 
-
-
     @Override
     public ProfesorOutputDto updateProfesor(ProfesorInputDto profesor, int id ) throws Exception {
-        Optional<Profesor> profesorDb = profesorRepository.findById(id);
+        Profesor profesorDb = profesorRepository.findById(id).orElseThrow();
         Profesor profesorInput = ProfesorMapper.Instance.profesorInputDTOToProfesor(profesor);
         Boolean isEqual = Objects.equals(profesorDb, profesorInput);
         if(isEqual){
-            throw new Exception();
+            throw new Exception("No estas cambiando nada");
         }
         profesorRepository.save(profesorInput);
         return ProfesorMapper.Instance.profesorToProfesorOutputDTO(profesorInput);
     }
-
 }

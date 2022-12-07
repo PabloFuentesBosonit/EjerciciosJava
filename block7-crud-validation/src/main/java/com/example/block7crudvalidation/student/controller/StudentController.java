@@ -39,7 +39,6 @@ public class StudentController{
     public StudentOutputDto getStudentByIdTemplate(@PathVariable int id) {
         ResponseEntity<StudentOutputDto> template =  new RestTemplate().getForEntity("http://localhost:8080/student/"+id,
                 StudentOutputDto.class);
-
             if (template.getStatusCode()== HttpStatus.ACCEPTED.OK)
                 return template.getBody();
             throw new RuntimeException("The server didn't respond OK");
