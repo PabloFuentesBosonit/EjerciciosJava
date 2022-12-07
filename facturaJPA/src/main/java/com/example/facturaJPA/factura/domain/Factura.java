@@ -21,11 +21,17 @@ public class Factura {
     @Column
     private double importeFactura;
 
+    /*
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
+     */
+
+    /*
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "lineas_fra")
     private List<Linea> lineas;
+
+     */
 }

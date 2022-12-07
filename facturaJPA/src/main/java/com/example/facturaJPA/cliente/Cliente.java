@@ -1,4 +1,4 @@
-package com.example.facturaJPA.factura.domain;
+package com.example.facturaJPA.cliente;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.facturaJPA.factura.domain;
+package com.example.facturaJPA.linea.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,16 +17,16 @@ public class Linea  {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idFra;
+    private int id;
 
     @Column(nullable = false)
-    private String nombreProducto;
+    private String producto;
 
     @Column
     private double cantidad;
 
     @Column
-    private double precio;
+    private double importe;
 
     // Una factura tiene muchas líneas y muchas líneas tienen una sola factura.
 }
