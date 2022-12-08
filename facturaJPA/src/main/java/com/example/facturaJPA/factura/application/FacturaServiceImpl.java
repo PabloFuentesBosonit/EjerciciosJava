@@ -5,10 +5,15 @@ import com.example.facturaJPA.factura.controller.dto.FacturaMapper;
 import com.example.facturaJPA.factura.controller.dto.FacturaOutputDto;
 import com.example.facturaJPA.factura.domain.Factura;
 import com.example.facturaJPA.factura.repository.FacturaRepository;
+import com.example.facturaJPA.linea.controller.dto.LineaInputDto;
+import com.example.facturaJPA.linea.controller.dto.LineaMapper;
+import com.example.facturaJPA.linea.domain.Linea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -22,6 +27,17 @@ public class FacturaServiceImpl implements FacturaService{
         Factura factura = FacturaMapper.Instance.facturaInputDtoToFactura(facturaInput);
         Factura facturaDb = facturaRepository.save(factura);
         return FacturaMapper.Instance.facturaToFacturaOutputDto(facturaDb);
+    }
+
+    @Override
+    public FacturaOutputDto addLineas(LineaInputDto lineaInputDto, int idFactura) {
+        Factura factura = facturaRepository.findById(idFactura).orElseThrow();
+        Linea linea = LineaMapper.Instance.lineaInputDtoToLinea(lineaInputDto);
+        List<Linea> lineas = new ArrayList<>();
+        lineas.add(linea) ;
+        factura.setLineas(lineas);
+        FacturaOutputDto facturaDb = FacturaMapper.Instance.facturaToFacturaOutputDto(factura);
+        return facturaDb;
     }
 
     @Override

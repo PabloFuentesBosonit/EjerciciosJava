@@ -1,5 +1,6 @@
 package com.example.facturaJPA.linea.domain;
 
+import com.example.facturaJPA.factura.domain.Factura;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,11 @@ import javax.persistence.*;
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
-public class Linea  {
+public class Linea {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
@@ -28,5 +29,7 @@ public class Linea  {
     @Column
     private double importe;
 
-    // Una factura tiene muchas líneas y muchas líneas tienen una sola factura.
+    @ManyToOne //Hasta que punto lo necesito ?
+    private Factura factura;
+
 }

@@ -13,6 +13,4 @@ public class LineaInputDto {
     double cantidad;
 
     double importe;
-
-    int idFactura;
 }

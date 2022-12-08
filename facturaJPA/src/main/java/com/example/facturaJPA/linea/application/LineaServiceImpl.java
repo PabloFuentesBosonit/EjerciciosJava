@@ -19,8 +19,8 @@ public class LineaServiceImpl implements LineaService {
 
 
     @Override
-    public LineaOutputDto addLinea(LineaInputDto lineaInput) {
-        Linea linea = LineaMapper.Instance.lineaInputDtoToLinea(lineaInput);
+    public LineaOutputDto addLinea(LineaInputDto lineaInputDto) {
+        Linea linea = LineaMapper.Instance.lineaInputDtoToLinea(lineaInputDto);
         Linea lineaDb = lineaRepository.save(linea);
         return LineaMapper.Instance.lineaToLineaOutputDto(lineaDb);
     }

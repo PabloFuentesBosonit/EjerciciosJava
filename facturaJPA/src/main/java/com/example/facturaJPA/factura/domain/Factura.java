@@ -1,10 +1,13 @@
 package com.example.facturaJPA.factura.domain;
 
 
+import com.example.facturaJPA.cliente.domain.Cliente;
+import com.example.facturaJPA.linea.domain.Linea;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,24 +17,14 @@ import java.util.List;
 public class Factura {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_factura")
     private int id;
 
     @Column
     private double importeFactura;
 
-    /*
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
-
-     */
-
-    /*
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "lineas_fra")
-    private List<Linea> lineas;
+    private List<Linea> lineas = new ArrayList<>();
 
-     */
 }

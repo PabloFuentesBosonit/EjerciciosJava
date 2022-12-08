@@ -4,6 +4,7 @@ package com.example.facturaJPA.factura.controller;
 import com.example.facturaJPA.factura.application.FacturaServiceImpl;
 import com.example.facturaJPA.factura.controller.dto.FacturaInputDto;
 import com.example.facturaJPA.factura.controller.dto.FacturaOutputDto;
+import com.example.facturaJPA.linea.controller.dto.LineaInputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,12 @@ public class FacturaController {
         return ResponseEntity.ok().body(facturaService.addFactura(facturaInputDto));
     }
 
+    @PostMapping("/linea/{idFactura}")
+    public ResponseEntity<FacturaOutputDto> addLinea(@RequestBody LineaInputDto lineaInputDto,
+                                                     @PathVariable int idFactura) {
+        return ResponseEntity.ok().body(facturaService.addLineas(lineaInputDto, idFactura));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<FacturaOutputDto> getFacturasById(@PathVariable int id) {
         try {
@@ -32,11 +39,13 @@ public class FacturaController {
     public ResponseEntity<String> deleteFacturaById(@PathVariable int id) {
         try {
             facturaService.deleteFacturaById(id);
-            return ResponseEntity.ok().body("student with id: "+id+" was deleted");
+            return ResponseEntity.ok().body("Factura with id: "+id+" was deleted");
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
     @GetMapping
     public Iterable<FacturaOutputDto> getAllFacturas(

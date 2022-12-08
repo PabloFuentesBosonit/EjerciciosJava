@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FacturaInputDto {
+    int id;
     double importeFactura;
 }
