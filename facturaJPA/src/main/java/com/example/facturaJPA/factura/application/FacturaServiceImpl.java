@@ -1,5 +1,8 @@
 package com.example.facturaJPA.factura.application;
 
+import com.example.facturaJPA.cliente.controller.dto.ClienteMapper;
+import com.example.facturaJPA.cliente.controller.dto.ClienteOutputDto;
+import com.example.facturaJPA.cliente.domain.Cliente;
 import com.example.facturaJPA.factura.controller.dto.FacturaInputDto;
 import com.example.facturaJPA.factura.controller.dto.FacturaMapper;
 import com.example.facturaJPA.factura.controller.dto.FacturaOutputDto;
@@ -7,7 +10,9 @@ import com.example.facturaJPA.factura.domain.Factura;
 import com.example.facturaJPA.factura.repository.FacturaRepository;
 import com.example.facturaJPA.linea.controller.dto.LineaInputDto;
 import com.example.facturaJPA.linea.controller.dto.LineaMapper;
+import com.example.facturaJPA.linea.controller.dto.LineaOutputDto;
 import com.example.facturaJPA.linea.domain.Linea;
+import com.example.facturaJPA.linea.repository.LineaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,8 @@ import java.util.Optional;
 public class FacturaServiceImpl implements FacturaService{
     @Autowired
     FacturaRepository facturaRepository;
+    @Autowired
+    private LineaRepository lineaRepository;
 
     @Override
     public FacturaOutputDto addFactura(FacturaInputDto facturaInput) {
@@ -33,22 +40,45 @@ public class FacturaServiceImpl implements FacturaService{
     public FacturaOutputDto addLineas(LineaInputDto lineaInputDto, int idFactura) {
         Factura factura = facturaRepository.findById(idFactura).orElseThrow();
         Linea linea = LineaMapper.Instance.lineaInputDtoToLinea(lineaInputDto);
-        List<Linea> lineas = new ArrayList<>();
-        lineas.add(linea) ;
-        factura.setLineas(lineas);
+
+        factura.getLineas().add(linea);
+        linea.setFactura(factura);
+
+        facturaRepository.save(factura);
+        lineaRepository.save(linea);
+
+        List<LineaOutputDto> lineasOut = factura.getLineas()
+                .stream()
+                .map(LineaMapper.Instance::lineaToLineaOutputDto).toList();
+
         FacturaOutputDto facturaDb = FacturaMapper.Instance.facturaToFacturaOutputDto(factura);
+        facturaDb.setLineas(lineasOut);
         return facturaDb;
     }
 
     @Override
     public FacturaOutputDto getFacturaById(int id) {
-        Optional<Factura> person = facturaRepository.findById(id);
-        return FacturaMapper.Instance.facturaToFacturaOutputDto(person.get());
+        Factura factura = facturaRepository.findById(id).orElseThrow();
+        List<LineaOutputDto> lineasOut = factura.getLineas()
+                .stream()
+                .map(LineaMapper.Instance::lineaToLineaOutputDto).toList();
+
+        Cliente clienteDb = factura.getCliente();
+        ClienteOutputDto cliente = ClienteMapper.Instance.clienteToClienteOutputDto(clienteDb);
+
+        FacturaOutputDto facturaDb = FacturaMapper.Instance.facturaToFacturaOutputDto(factura);
+        facturaDb.setLineas(lineasOut);
+        facturaDb.setCliente(cliente);
+        return facturaDb;
     }
 
     @Override
     public void deleteFacturaById(int id) {
-        facturaRepository.findById(id).orElseThrow();
+        Factura factura = facturaRepository.findById(id).orElseThrow();
+        if(factura.getCliente() != null){
+            factura.setCliente(null);
+            facturaRepository.save(factura);
+        }
         facturaRepository.deleteById(id);
     }
 

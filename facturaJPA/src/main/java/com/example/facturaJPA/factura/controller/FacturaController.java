@@ -20,7 +20,7 @@ public class FacturaController {
         return ResponseEntity.ok().body(facturaService.addFactura(facturaInputDto));
     }
 
-    @PostMapping("/linea/{idFactura}")
+    @PostMapping("/lineas/{idFactura}")
     public ResponseEntity<FacturaOutputDto> addLinea(@RequestBody LineaInputDto lineaInputDto,
                                                      @PathVariable int idFactura) {
         return ResponseEntity.ok().body(facturaService.addLineas(lineaInputDto, idFactura));

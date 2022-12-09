@@ -9,7 +9,7 @@ public interface FacturaService {
     FacturaOutputDto addFactura(FacturaInputDto facturaInputDto);
     FacturaOutputDto addLineas(LineaInputDto lineaInputDto, int idFactura);
     FacturaOutputDto getFacturaById(int id);
-    void deleteFacturaById( int id);
+    void deleteFacturaById(int id);
     Iterable<FacturaOutputDto> getAllFacturas(int pageNumber, int pageSize);
     FacturaOutputDto updateFactura(FacturaInputDto facturaInputDto, int id) throws Exception;
 

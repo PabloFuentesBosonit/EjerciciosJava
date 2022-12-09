@@ -24,7 +24,7 @@ public class Cliente {
     @Column(name="nombre", nullable = false, length = 100)
     private String nombre;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Factura> facturas = new ArrayList<>();
 
     public Cliente(String nombre){

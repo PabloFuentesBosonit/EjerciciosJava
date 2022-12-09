@@ -1,6 +1,8 @@
 package com.example.facturaJPA.factura.controller.dto;
 
+import com.example.facturaJPA.cliente.controller.dto.ClienteOutputDto;
 import com.example.facturaJPA.cliente.domain.Cliente;
+import com.example.facturaJPA.linea.controller.dto.LineaOutputDto;
 import com.example.facturaJPA.linea.domain.Linea;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +16,6 @@ import java.util.List;
 public class FacturaOutputDto {
     int id;
     double importeFactura;
-    List<Linea> lineas;
+    ClienteOutputDto cliente;
+    List<LineaOutputDto> lineas;
 }

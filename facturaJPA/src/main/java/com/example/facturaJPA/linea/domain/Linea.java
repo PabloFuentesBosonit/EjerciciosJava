@@ -29,7 +29,7 @@ public class Linea {
     @Column
     private double importe;
 
-    @ManyToOne //Hasta que punto lo necesito ?
+    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Factura factura;
 
 }

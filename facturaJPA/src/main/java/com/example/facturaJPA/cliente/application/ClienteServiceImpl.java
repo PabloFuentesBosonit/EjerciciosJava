@@ -33,12 +33,8 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteOutputDto getClienteById(int id) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow();
-        List<FacturaOutputDto> facturas = cliente.getFacturas()
-                .stream()
-                .map(FacturaMapper.Instance::facturaToFacturaOutputDto).toList();
-
         ClienteOutputDto response = ClienteMapper.Instance.clienteToClienteOutputDto(cliente);
-        response.setFacturas(facturas);
+
         return response;
     }
 

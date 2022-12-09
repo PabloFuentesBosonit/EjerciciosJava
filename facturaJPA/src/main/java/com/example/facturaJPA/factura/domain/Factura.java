@@ -24,6 +24,9 @@ public class Factura {
     @Column
     private double importeFactura;
 
+    @ManyToOne
+    private Cliente cliente;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Linea> lineas = new ArrayList<>();
 

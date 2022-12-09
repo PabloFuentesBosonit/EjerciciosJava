@@ -36,7 +36,9 @@ public class CargaDatosCommand implements CommandLineRunner {
         int num1 = 10;
         int num2 = 15;
 
-        Cliente cliente = new Cliente("Pablo");
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Pablo");
+        clienteRepository.save(cliente);
 
         Factura factura = new Factura();
         factura.setImporteFactura(num1 + num2);
@@ -55,11 +57,11 @@ public class CargaDatosCommand implements CommandLineRunner {
         List<Linea> lineas = lineaRepository.saveAll(Arrays.asList(linea,linea2));
 
         factura.setLineas(lineas);
+        factura.setCliente(cliente);
 
         facturaRepository.save(factura);
+
         cliente.getFacturas().add(factura);
         clienteRepository.save(cliente);
-
     }
-
 }

@@ -14,5 +14,4 @@ import java.util.List;
 public class ClienteOutputDto {
     int id;
     String nombre;
-    List<FacturaOutputDto> facturas;
 }
