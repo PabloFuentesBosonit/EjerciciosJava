@@ -42,21 +42,22 @@ public class CargaDatosCommand implements CommandLineRunner {
 
         Factura factura = new Factura();
         factura.setImporteFactura(num1 + num2);
-        facturaRepository.save(factura);
 
         Linea linea = new Linea();
         linea.setCantidad(5);
         linea.setImporte(num1);
         linea.setProducto("Champú");
+        factura.getLineas().add(linea);
 
         Linea linea2= new Linea();
         linea2.setCantidad(7);
         linea2.setImporte(num2);
         linea2.setProducto("Galletas");
+        factura.getLineas().add(linea2);
 
-        List<Linea> lineas = lineaRepository.saveAll(Arrays.asList(linea,linea2));
+        facturaRepository.save(factura);
+        //List<Linea> lineas = lineaRepository.saveAll(Arrays.asList(linea,linea2));
 
-        factura.setLineas(lineas);
         factura.setCliente(cliente);
 
         facturaRepository.save(factura);
