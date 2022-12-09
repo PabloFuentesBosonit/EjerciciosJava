@@ -3,6 +3,7 @@ package com.example.facturaJPA;
 import com.example.facturaJPA.cliente.domain.Cliente;
 import com.example.facturaJPA.cliente.repository.ClienteRepository;
 
+import com.example.facturaJPA.factura.application.FacturaService;
 import com.example.facturaJPA.factura.domain.Factura;
 import com.example.facturaJPA.factura.repository.FacturaRepository;
 
@@ -30,35 +31,35 @@ public class CargaDatosCommand implements CommandLineRunner {
     @Autowired
     private FacturaRepository facturaRepository;
 
+    @Autowired
+    private FacturaService facturaService;
+
 
     public void run(String... args) throws Exception {
 
-        int num1 = 10;
-        int num2 = 15;
 
         Cliente cliente = new Cliente();
         cliente.setNombre("Pablo");
         clienteRepository.save(cliente);
 
         Factura factura = new Factura();
-        factura.setImporteFactura(num1 + num2);
 
         Linea linea = new Linea();
         linea.setCantidad(5);
-        linea.setImporte(num1);
+        linea.setImporte(15);
         linea.setProducto("Champú");
         factura.getLineas().add(linea);
 
         Linea linea2= new Linea();
         linea2.setCantidad(7);
-        linea2.setImporte(num2);
+        linea2.setImporte(25);
         linea2.setProducto("Galletas");
         factura.getLineas().add(linea2);
 
-        facturaRepository.save(factura);
-        //List<Linea> lineas = lineaRepository.saveAll(Arrays.asList(linea,linea2));
 
         factura.setCliente(cliente);
+        factura.setImporteFactura((linea.getCantidad()*linea.getImporte())
+                + (linea2.getCantidad()*linea2.getImporte()));
 
         facturaRepository.save(factura);
 

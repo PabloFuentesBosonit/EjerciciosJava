@@ -44,7 +44,9 @@ public class FacturaServiceImpl implements FacturaService{
         factura.getLineas().add(linea);
         linea.setFactura(factura);
 
-        facturaRepository.save(factura);
+        Factura facturaNew = actualizaImporte(factura);
+
+        facturaRepository.save(facturaNew);
         lineaRepository.save(linea);
 
         List<LineaOutputDto> lineasOut = factura.getLineas()
@@ -101,4 +103,15 @@ public class FacturaServiceImpl implements FacturaService{
         facturaRepository.save(factura);
         return FacturaMapper.Instance.facturaToFacturaOutputDto(factura);
     }
+
+    public Factura actualizaImporte(Factura factura) {
+        List<Linea> lineas = factura.getLineas();
+        double total = 0;
+        for(Linea linea : lineas){
+            total = total + linea.getImporte()* linea.getCantidad();
+        }
+        factura.setImporteFactura(total);
+        return factura;
+    }
+
 }
