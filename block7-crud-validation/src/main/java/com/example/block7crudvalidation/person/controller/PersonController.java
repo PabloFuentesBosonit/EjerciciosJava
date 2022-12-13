@@ -12,24 +12,26 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @AllArgsConstructor
-@RequestMapping("/person")
+//@RequestMapping("/person")
 public class PersonController {
     @Autowired
     PersonService personService;
 
     @ResponseStatus
-    @PostMapping
-    public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto person) {
+    @PostMapping("/addperson")
+    public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto person) throws Exception {
         try {
             return ResponseEntity.ok(personService.addPerson(person));
         } catch (Exception e) {
-            throw new UnprocessableEntityException("Entidad no procesable");
+            System.out.println(person.toString());
+            throw new Exception();
         }
     }
 
     @ResponseStatus
-    @GetMapping("/{id}")
+    @GetMapping("/person/{id}")
     public ResponseEntity<PersonOutputDto> getPersonById(@PathVariable int id) {
         try{
             return ResponseEntity.ok().body(personService.getPersonById(id));
@@ -59,7 +61,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getall")
     public Iterable<PersonOutputDto> getAllPersons(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize) {

@@ -29,7 +29,7 @@ public class Person {
     Student student;
 
     @Column(name = "user_name", nullable = false, length = 10)
-    private String user;
+    private String usuario;
 
     @Column(name = "user_password", nullable = false)
     private String password;
@@ -41,10 +41,10 @@ public class Person {
     private String surname;
 
     @Column(name = "personal_email", nullable = false)
-    private String email;
+    private String company_email;
 
     @Column(name = "company_email", nullable = false)
-    private String companyEmail;
+    private String personal_email;
 
     @Column(name = "city", nullable = false)
     private String city;
@@ -53,16 +53,16 @@ public class Person {
     private Boolean active;
 
     @Column(name = "created_at", nullable = false)
-    private Date createdAt = new Date();
+    private Date created_date = new Date();
 
     @Column(name = "updated_at")
     private Date updatedAt;
 
     @Column(name = "image_url")
-    private URL imageUrl;
+    private URL image_url;
 
     @Column(name= "LastDate")
-    private  Date terminationDate = new Date();
+    private  Date termination_date = new Date();
 
 }
 

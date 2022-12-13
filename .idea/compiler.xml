@@ -23,10 +23,12 @@
         <module name="block6-simple-controllers" />
         <module name="block6-person-controllers" />
         <module name="block6-path-variable-headers" />
+        <module name="block11-upload-download-files" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="1" target="17" />
+      <module name="block11-cors" target="17" />
       <module name="block3-create-repo-git" target="17" />
       <module name="block5-loggin" target="17" />
       <module name="block5-properties" target="17" />
@@ -40,6 +42,8 @@
       <module name="1" options="-parameters" />
       <module name="Downloads" options="-parameters" />
       <module name="block10-dockerize-app" options="-parameters" />
+      <module name="block11-cors" options="-parameters" />
+      <module name="block11-upload-download-files" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
       <module name="block6-path-variable-headers" options="-parameters" />
       <module name="block6-person-controllers" options="-parameters" />
