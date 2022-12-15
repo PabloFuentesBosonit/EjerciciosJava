@@ -12,8 +12,8 @@ public class FileServiceImpl implements FileService {
     FileRepository fileRepository;
 
     @Override
-    public FileNew addFile(FileNew fileNewUpDown) throws Exception {
-        return fileRepository.save(fileNewUpDown);
+    public FileNew addFile(FileNew fileNew) throws Exception {
+        return fileRepository.save(fileNew);
     }
 
     @Override

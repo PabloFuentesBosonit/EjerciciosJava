@@ -5,6 +5,7 @@ import com.example.block11uploaddownloadfiles.domain.FileNew;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
-@RestController
+@Controller
 @RequestMapping("/fileNew")
 public class FileController {
 
@@ -22,6 +23,7 @@ public class FileController {
     FileService fileService;
 
     //añadir archivo
+
     @PostMapping
     public ResponseEntity addFile (@RequestParam("fileNew") MultipartFile multipartFile) throws Exception {
 
@@ -59,5 +61,4 @@ public class FileController {
         } else { throw new FileNotFoundException("FileNew not found");
         }
     }
-
 }

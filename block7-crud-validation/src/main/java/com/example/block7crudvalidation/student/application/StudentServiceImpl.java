@@ -103,8 +103,6 @@ public class StudentServiceImpl implements StudentService{
         return lista;
     }
 
-
-
     @Override
     public StudentOutputDto updateStudent(StudentInputDto student, int id) throws Exception {
         Optional<Student> studentDb = studentRepository.findById(id);

@@ -28,6 +28,7 @@
         <option value="$PROJECT_DIR$/block10-dockerize-app/pom.xml" />
         <option value="$PROJECT_DIR$/facturaJPA/pom.xml" />
         <option value="$PROJECT_DIR$/block11-upload-download-files/pom.xml" />
+        <option value="$PROJECT_DIR$/block12-kafka/pom.xml" />
       </list>
     </option>
   </component>
