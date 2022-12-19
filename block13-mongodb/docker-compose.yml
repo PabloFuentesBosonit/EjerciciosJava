@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    networks:
+      - mongo-app
+
+  spring-app:
+    image: mymongo
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-app
+
+networks:
+  mongo-app:
+    driver: bridge
+
+

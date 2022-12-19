@@ -29,6 +29,8 @@
         <option value="$PROJECT_DIR$/facturaJPA/pom.xml" />
         <option value="$PROJECT_DIR$/block11-upload-download-files/pom.xml" />
         <option value="$PROJECT_DIR$/block12-kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/block13-criterial-builder/pom.xml" />
+        <option value="$PROJECT_DIR$/block13-mongodb/pom.xml" />
       </list>
     </option>
   </component>
