@@ -7,6 +7,7 @@ import com.example.block7crudvalidation.person.exception.EntityNotFoundException
 import com.example.block7crudvalidation.person.exception.UnprocessableEntityException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,27 +15,26 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @AllArgsConstructor
-//@RequestMapping("/person")
+//@RequestMapping("/person") // estaba muteado por otro ejericio el de Cors
 public class PersonController {
     @Autowired
     PersonService personService;
 
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addperson")
-    public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto person) throws Exception {
+    public PersonOutputDto addPerson(@RequestBody PersonInputDto person) throws Exception {
         try {
-            return ResponseEntity.ok(personService.addPerson(person));
+            return personService.addPerson(person);
         } catch (Exception e) {
-            System.out.println(person.toString());
             throw new Exception();
         }
     }
 
     @ResponseStatus
     @GetMapping("/person/{id}")
-    public ResponseEntity<PersonOutputDto> getPersonById(@PathVariable int id) {
+    public PersonOutputDto getPersonById(@PathVariable int id) {
         try{
-            return ResponseEntity.ok().body(personService.getPersonById(id));
+            return personService.getPersonById(id);
         }catch (Exception e){
             throw new EntityNotFoundException("Usuario no encontrado");
         }
@@ -51,8 +51,8 @@ public class PersonController {
     }
 
 
-    @DeleteMapping
-    public ResponseEntity<String> deletePersonById(@RequestParam int id) {
+    @DeleteMapping("/deleted/{id}")
+    public ResponseEntity<String> deletePersonById(@PathVariable int id) {
         try {
             personService.deletePersonById(id);
             return ResponseEntity.ok().body("person with id: "+id+" was deleted");
@@ -68,11 +68,11 @@ public class PersonController {
         return personService.getAllPersons(pageNumber, pageSize);
     }
 
-    @ResponseStatus
-    @PutMapping("/{id}")
-    public ResponseEntity<PersonOutputDto> updatePerson(@RequestBody PersonInputDto person, @PathVariable int id)
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/modificate/{id}")
+    public PersonOutputDto updatePerson(@RequestBody PersonInputDto person, @PathVariable int id)
             throws Exception {
-        return ResponseEntity.ok(personService.updatePerson(person, id));
+        return personService.updatePerson(person, id);
     }
 
 }

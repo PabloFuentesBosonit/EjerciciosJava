@@ -43,6 +43,7 @@ public class PersonServiceImpl implements PersonService {
         personRepository.findById(id).orElseThrow();
         personRepository.deleteById(id);
     }
+
     @Override
     public List<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
@@ -52,9 +53,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonOutputDto updatePerson(PersonInputDto person, int id) throws UnprocessableEntityException {
+    public PersonOutputDto updatePerson(PersonInputDto newPerson, int id) throws UnprocessableEntityException {
         Optional<Person> personaDb = personRepository.findById(id);
-        Person personInput = PersonMapper.Instance.personInputDTOToPerson(person);
+        Person personInput = PersonMapper.Instance.personInputDTOToPerson(newPerson);
+
         Boolean isEqual = Objects.equals(personaDb, personInput);
         if(isEqual){
             throw new UnprocessableEntityException("Los campos introducidos no son compatibles");
@@ -63,5 +65,4 @@ public class PersonServiceImpl implements PersonService {
         return PersonMapper.Instance.personToPersonOutputDTO(personInput);
     }
 }
-
 

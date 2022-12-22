@@ -49,10 +49,10 @@ public class Person {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private Date created_date = new Date();
 
     @Column(name = "updated_at")

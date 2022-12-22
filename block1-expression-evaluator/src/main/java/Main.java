@@ -82,7 +82,6 @@ public class Main {
             BufferedReader mibuffer = Files.newBufferedReader(entrada); //recoge el texto
             String line = mibuffer.readLine();//lee el documento
 
-
             while (line != null) { // hasta que no encuentre un null no para
 
                 String[] personasData = line.split(":");

@@ -14,7 +14,11 @@ public class PersonInputDto {
     private String personal_email;
     private String city;
     private URL image_url;
-    private Date created_date;
     private Boolean active;
-    private Date termination_date;
 }
+
+// he quitado para el ejercicio del testing puede que afectara a otro ejercicio.
+    /*
+    private Date created_date;
+    private Date termination_date;
+    */
