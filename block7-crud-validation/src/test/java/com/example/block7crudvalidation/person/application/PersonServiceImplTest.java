@@ -77,6 +77,7 @@ class PersonServiceImplTest {
     void addPerson() {
         when(repository.save(person)).thenReturn(person);
         test.addPerson(personInputDto);
+        assertEquals(personInputDto.getName(), person.getName());
         verify(repository, atLeastOnce())
                 .save(person);
 
@@ -126,7 +127,7 @@ class PersonServiceImplTest {
 
         PersonInputDto newPerson = new PersonInputDto();
 
-        newPerson.setUsuario("PabloCrack");
+        newPerson.setUsuario("PabloNocrack");
         newPerson.setPassword("password");
         newPerson.setName("Pablo");
         newPerson.setSurname("Fuentes");
@@ -137,6 +138,7 @@ class PersonServiceImplTest {
         newPerson.setImage_url(person.getImage_url());
 
         assertInstanceOf(PersonInputDto.class, newPerson);
+        assertNotEquals(newPerson.getUsuario(), person.getUsuario());
 
         test.updatePerson(newPerson, person.getId_person());
 
