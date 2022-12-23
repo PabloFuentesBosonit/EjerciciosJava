@@ -32,9 +32,9 @@ public class PersonController {
 
     @ResponseStatus
     @GetMapping("/person/{id}")
-    public PersonOutputDto getPersonById(@PathVariable int id) {
+    public ResponseEntity<PersonOutputDto> getPersonById(@PathVariable int id) {
         try{
-            return personService.getPersonById(id);
+            return ResponseEntity.ok().body(personService.getPersonById(id));
         }catch (Exception e){
             throw new EntityNotFoundException("Usuario no encontrado");
         }
