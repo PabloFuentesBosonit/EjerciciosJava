@@ -31,6 +31,7 @@
         <option value="$PROJECT_DIR$/block12-kafka/pom.xml" />
         <option value="$PROJECT_DIR$/block13-criterial-builder/pom.xml" />
         <option value="$PROJECT_DIR$/block13-mongodb/pom.xml" />
+        <option value="$PROJECT_DIR$/block15-spring-security/pom.xml" />
       </list>
     </option>
   </component>
