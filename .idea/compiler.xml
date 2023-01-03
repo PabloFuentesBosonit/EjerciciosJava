@@ -17,8 +17,11 @@
         <module name="block3-maven-package" />
         <module name="demo" />
         <module name="facturaJPA" />
+        <module name="block16-trip" />
+        <module name="block16-spring-cloud" />
         <module name="demo (1)" />
         <module name="block12-kafka" />
+        <module name="block16-ticket" />
         <module name="block5-command-line-runner" />
         <module name="logging" />
         <module name="Downloads" />
@@ -32,6 +35,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="1" target="17" />
+      <module name="Backend" target="17" />
       <module name="block11-cors" target="17" />
       <module name="block3-create-repo-git" target="17" />
       <module name="block5-loggin" target="17" />
@@ -44,6 +48,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="1" options="-parameters" />
+      <module name="Backend" options="-parameters" />
       <module name="Downloads" options="-parameters" />
       <module name="block10-dockerize-app" options="-parameters" />
       <module name="block11-cors" options="-parameters" />
@@ -52,6 +57,9 @@
       <module name="block13-criterial-builder" options="-parameters" />
       <module name="block13-mongodb" options="-parameters" />
       <module name="block15-spring-security" options="-parameters" />
+      <module name="block16-spring-cloud" options="" />
+      <module name="block16-ticket" options="-parameters" />
+      <module name="block16-trip" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
       <module name="block6-path-variable-headers" options="-parameters" />
       <module name="block6-person-controllers" options="-parameters" />

@@ -1,0 +1,48 @@
+version: '3.8'
+
+networks:
+  cloudnetwork:
+    driver: bridge
+
+services:
+  trip_DB:
+    image: postgres:alpine
+    container_name: trip_DB
+    environment:
+      - POSTGRES_PASSWORD=contrasena
+      - POSTGRES_DB=trip
+    ports:
+      - "5432:5432"
+    networks:
+      - cloudnetwork
+
+  ticket_DB:
+    image: postgres:alpine
+    container_name: ticket_DB
+    environment:
+      - POSTGRES_PASSWORD=contrasena
+      - POSTGRES_DB=ticket
+    ports:
+      - "5433:5433"
+    networks:
+      - cloudnetwork
+
+  trip_app:
+    image: trip_image
+    build: ./block16-trip
+    networks:
+      - cloudnetwork
+    ports:
+      - "8081:8081"
+    depends_on:
+      - trip_DB
+
+  ticket_app:
+    image: ticket_image
+    build: ./block16-ticket
+    networks:
+      - cloudnetwork
+    ports:
+      - "8082:8082"
+    depends_on:
+      - ticket_DB

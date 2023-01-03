@@ -32,7 +32,15 @@
         <option value="$PROJECT_DIR$/block13-criterial-builder/pom.xml" />
         <option value="$PROJECT_DIR$/block13-mongodb/pom.xml" />
         <option value="$PROJECT_DIR$/block15-spring-security/pom.xml" />
+        <option value="$PROJECT_DIR$/block16-spring-cloud/pom.xml" />
+        <option value="$PROJECT_DIR$/block16-spring-cloud/block16-trip/pom.xml" />
+        <option value="$PROJECT_DIR$/block16-spring-cloud/block16-ticket/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/block16-spring-cloud/Backend/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
