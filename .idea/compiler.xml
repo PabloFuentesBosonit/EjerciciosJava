@@ -8,29 +8,31 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="block7-crud-validation" />
+        <module name="block13-mongodb" />
+        <module name="demo" />
+        <module name="block16-ticket" />
+        <module name="block6-person-controllers" />
+        <module name="block16-eureka" />
+        <module name="block6-path-variable-headers" />
+        <module name="block11-upload-download-files" />
+        <module name="block15-spring-security" />
+        <module name="block16-gateway" />
         <module name="block5-logging" />
         <module name="block7-crud" />
         <module name="block1-expression-evaluator" />
         <module name="block5-profiles" />
-        <module name="block13-mongodb" />
         <module name="block10-dockerize-app" />
         <module name="block3-maven-package" />
-        <module name="demo" />
         <module name="facturaJPA" />
         <module name="block16-trip" />
         <module name="block16-spring-cloud" />
         <module name="demo (1)" />
         <module name="block12-kafka" />
-        <module name="block16-ticket" />
         <module name="block5-command-line-runner" />
         <module name="logging" />
         <module name="Downloads" />
         <module name="block13-criterial-builder" />
         <module name="block6-simple-controllers" />
-        <module name="block6-person-controllers" />
-        <module name="block6-path-variable-headers" />
-        <module name="block11-upload-download-files" />
-        <module name="block15-spring-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -57,6 +59,8 @@
       <module name="block13-criterial-builder" options="-parameters" />
       <module name="block13-mongodb" options="-parameters" />
       <module name="block15-spring-security" options="-parameters" />
+      <module name="block16-eureka" options="-parameters" />
+      <module name="block16-gateway" options="-parameters" />
       <module name="block16-spring-cloud" options="" />
       <module name="block16-ticket" options="-parameters" />
       <module name="block16-trip" options="-parameters" />

@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: trip
+          uri: lb://TRIP-SERVICE
+          predicates:
+            - Path=/find/**,/trip/**
+        - id: ticket
+          uri: lb://TICKET-SERVICE
+          predicates:
+            - Path=/generateTicket/**
+  main:
+    web-application-type: reactive
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true

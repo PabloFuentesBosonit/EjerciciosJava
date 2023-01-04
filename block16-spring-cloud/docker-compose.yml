@@ -27,7 +27,7 @@ services:
     networks:
       - cloudnetwork
 
-  trip_app:
+  trip:
     image: trip_image
     build: ./block16-trip
     networks:
@@ -46,3 +46,11 @@ services:
       - "8082:8082"
     depends_on:
       - ticket_DB
+
+  eureka:
+    image: eureka-server
+    build: ./block16-eureka
+    networks:
+      - cloudnetwork
+    ports:
+      - "8761:8761"

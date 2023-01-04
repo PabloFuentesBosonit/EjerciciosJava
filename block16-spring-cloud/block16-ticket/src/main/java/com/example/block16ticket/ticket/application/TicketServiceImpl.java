@@ -21,7 +21,7 @@ public class TicketServiceImpl implements TicketService {
     TicketRepository ticketRepository;
 
     @Override
-    public Ticket generateTicket(int idPassenger, int idTrip) throws Error {
+    public Ticket generateTicket(int idPassenger, int idTrip) {
         HashMap<String, Integer> ids = new HashMap<>();
         ids.put("idPassenger",idPassenger);
         ids.put("idTrip", idTrip);
