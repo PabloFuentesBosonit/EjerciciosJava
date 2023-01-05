@@ -54,3 +54,11 @@ services:
       - cloudnetwork
     ports:
       - "8761:8761"
+
+  gateway:
+    image: gateway
+    build: ./block16-gateway
+    networks:
+      - cloudnetwork
+    ports:
+      - "8080:8080"

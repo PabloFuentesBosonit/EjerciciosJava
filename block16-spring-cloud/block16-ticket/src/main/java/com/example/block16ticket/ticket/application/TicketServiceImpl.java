@@ -27,11 +27,11 @@ public class TicketServiceImpl implements TicketService {
         ids.put("idTrip", idTrip);
 
         ResponseEntity<Client> client = new RestTemplate()
-                .getForEntity("http://localhost:8081/find/{idPassenger}", Client.class, ids);
+                .getForEntity("http://trip:8081/find/{idPassenger}", Client.class, ids);
         Client client1 = client.getBody();
 
         ResponseEntity<Trip> trip = new RestTemplate()
-                .getForEntity("http://localhost:8081/trip/{idTrip}", Trip.class, ids);
+                .getForEntity("http://trip:8081/trip/{idTrip}", Trip.class, ids);
         Trip trip1 = trip.getBody();
 
         Ticket ticket = new Ticket();
