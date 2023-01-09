@@ -37,6 +37,7 @@
         <option value="$PROJECT_DIR$/block16-spring-cloud/block16-ticket/pom.xml" />
         <option value="$PROJECT_DIR$/block16-spring-cloud/block16-eureka/pom.xml" />
         <option value="$PROJECT_DIR$/block16-spring-cloud/block16-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/block17-spring-batch/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -11,6 +11,7 @@
         <module name="block13-mongodb" />
         <module name="demo" />
         <module name="block16-ticket" />
+        <module name="block17-spring-batch" />
         <module name="block6-person-controllers" />
         <module name="block16-eureka" />
         <module name="block6-path-variable-headers" />
@@ -64,6 +65,7 @@
       <module name="block16-spring-cloud" options="" />
       <module name="block16-ticket" options="-parameters" />
       <module name="block16-trip" options="-parameters" />
+      <module name="block17-spring-batch" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
       <module name="block6-path-variable-headers" options="-parameters" />
       <module name="block6-person-controllers" options="-parameters" />
