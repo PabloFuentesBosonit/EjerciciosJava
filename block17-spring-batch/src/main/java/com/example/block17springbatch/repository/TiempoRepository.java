@@ -1,4 +1,4 @@
-package com.example.block17springbatch.infrastructure.repository;
+package com.example.block17springbatch.repository;
 
 import com.example.block17springbatch.domain.Tiempo;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,31 +1,30 @@
 package com.example.block17springbatch.domain;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
 public class TiempoRiesgo {
+
     public static final int HIGH = 3;
-    public static final int NORMAL = 2;
-    public static final int LOW = 1 ;
+    public static final int LOW = 2;
+    public static final int NORMAL = 1;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String fecha;
-    int riesgo;
+    private int riesgo;
 
-    String localidad;
-    String anio;
-    String mes;
-    Float temperaturaMedia;
-    int numeroMediciones;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Tiempo tiempo;
+
+    public TiempoRiesgo(String fecha, int riesgo, Tiempo tiempo) {
+        this.fecha = fecha;
+        this.riesgo = riesgo;
+        this.tiempo = tiempo;
+    }
 }
