@@ -19,13 +19,14 @@ public class TiempoItemProcessor implements ItemProcessor<Tiempo, TiempoRiesgo> 
         int temperatura = tiempo.getTemperatura();
         if(temperatura >= 36){
             riesgo = TiempoRiesgo.HIGH;
-        } else if (temperatura > -20) {
+        } else if (temperatura <36 && temperatura >=32) {
             riesgo = TiempoRiesgo.NORMAL;
         } else {
             riesgo = TiempoRiesgo.LOW;
         }
 
         TiempoRiesgo tiempoRiesgo = new TiempoRiesgo(fecha,riesgo,tiempo);
+        LOG.info("Generado" + tiempoRiesgo.toString());
         return tiempoRiesgo;
     }
 }
