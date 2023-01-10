@@ -44,7 +44,7 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-    // Lo que lee el csv EL READER de tiempo
+    // Lo que lee el csv: EL READER de tiempo
     @Bean
     public FlatFileItemReader<Tiempo> tiempoReader() {
         return new FlatFileItemReaderBuilder<Tiempo>()
@@ -94,13 +94,13 @@ public class BatchConfiguration {
         writer.setHeaderCallback(new FlatFileHeaderCallback() {
             @Override
             public void writeHeader(Writer writer) throws IOException {
-                writer.write("id, Localidad, Temperatura, Fecha");
+                writer.write("Localidad, Temperatura, Fecha");
             }
         });
         writer.setLineAggregator(new DelimitedLineAggregator<ErrorTemperatura>() {{
                 setDelimiter(",");
                 setFieldExtractor(new BeanWrapperFieldExtractor<ErrorTemperatura>(){{
-                        setNames(new String[]{"id", "localidad", "temperatura","fecha"});
+                        setNames(new String[]{"localidad", "temperatura","fecha"});
                 }});
             }});
         return writer;

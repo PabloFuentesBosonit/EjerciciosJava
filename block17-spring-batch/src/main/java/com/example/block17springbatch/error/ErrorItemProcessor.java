@@ -9,7 +9,7 @@ public class ErrorItemProcessor implements ItemProcessor<Tiempo, ErrorTemperatur
     @Override
     public ErrorTemperatura process(Tiempo tiempo) {
         if(tiempo.getTemperatura() > 50 || tiempo.getTemperatura() < -20){
-            return new ErrorTemperatura(tiempo.getId(), tiempo.getLocalidad(), tiempo.getFecha(), tiempo.getTemperatura());
+            return new ErrorTemperatura(tiempo.getLocalidad(), tiempo.getFecha(), tiempo.getTemperatura());
         }
         return null;
     }
