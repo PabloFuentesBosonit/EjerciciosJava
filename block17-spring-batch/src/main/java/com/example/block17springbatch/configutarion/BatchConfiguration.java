@@ -3,36 +3,30 @@ package com.example.block17springbatch.configutarion;
 import com.example.block17springbatch.domain.ErrorTemperatura;
 import com.example.block17springbatch.domain.Tiempo;
 import com.example.block17springbatch.domain.TiempoRiesgo;
-import com.example.block17springbatch.error.ErrorItemProcessor;
-import com.example.block17springbatch.job.TiempoItemProcessor;
-import com.example.block17springbatch.job.TiempoItemWriter;
+import com.example.block17springbatch.steps.secondStep.ErrorItemProcessor;
+import com.example.block17springbatch.steps.firstStep.TiempoItemProcessor;
+import com.example.block17springbatch.steps.firstStep.TiempoItemWriter;
 import com.example.block17springbatch.listener.TiempoItemProcessListener;
 import com.example.block17springbatch.listener.TiempoItemReaderListener;
 import com.example.block17springbatch.listener.TiempoItemWriterListener;
 import com.example.block17springbatch.listener.TiempoJobExecutionListener;
+import com.example.block17springbatch.steps.secondStep.ErrorItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
-
-import java.io.IOException;
-import java.io.Writer;
 
 @Configuration
 @EnableBatchProcessing
@@ -44,9 +38,10 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-    // Lo que lee el csv: EL READER de tiempo
+
+    // Lo que lee el csv: EL READER de Step1 y Step2
     @Bean
-    public FlatFileItemReader<Tiempo> tiempoReader() {
+    public FlatFileItemReader<Tiempo> reader() {
         return new FlatFileItemReaderBuilder<Tiempo>()
                 .name("tiempoItemReader")
                 .resource(new ClassPathResource("prueba.csv"))
@@ -59,7 +54,7 @@ public class BatchConfiguration {
                 .build();
     }
 
-    // EL PROCESSOR de tiempo
+    // EL PROCESSOR de Step1
 
     @Bean
     public ItemProcessor tiempoProcessor() {
@@ -67,7 +62,7 @@ public class BatchConfiguration {
     }
 
 
-    // EL WRITER de tiempo
+    // EL WRITER de Step1
 
     @Bean
     public ItemWriter tiempoWriter() {
@@ -75,36 +70,18 @@ public class BatchConfiguration {
     }
 
 
-    // El processor de Error
+
+
+    // EL PROCESSOR de Step2
     @Bean
     public ItemProcessor errorProcessor(){
         return new ErrorItemProcessor();
     }
 
-    // El writer de error
+    // EL WRITER de Step2
 
     @Bean
-    public FlatFileItemWriter<ErrorTemperatura> errorWriter() {
-        FlatFileItemWriter<ErrorTemperatura> writer = new FlatFileItemWriter<ErrorTemperatura>();
-
-        writer.setResource(new FileSystemResource("src/main/resources/errors.csv"));
-
-        writer.setResource(new FileSystemResource("block17-spring-batch/src/main/resources/errors.csv"));
-
-        writer.setHeaderCallback(new FlatFileHeaderCallback() {
-            @Override
-            public void writeHeader(Writer writer) throws IOException {
-                writer.write("Localidad, Temperatura, Fecha");
-            }
-        });
-        writer.setLineAggregator(new DelimitedLineAggregator<ErrorTemperatura>() {{
-                setDelimiter(",");
-                setFieldExtractor(new BeanWrapperFieldExtractor<ErrorTemperatura>(){{
-                        setNames(new String[]{"localidad", "temperatura","fecha"});
-                }});
-            }});
-        return writer;
-    }
+    public ItemWriter errorWriter() {return new ErrorItemWriter();}
 
 
     //Los Listeners
@@ -130,11 +107,13 @@ public class BatchConfiguration {
     }
 
 
-    // JOB configuration esto es la automatización de los pasos
+
+    // JOB configuration: esto es la automatización de los pasos
 
     @Bean
     public Job job(TiempoJobExecutionListener jobExecutionListener,Step step, Step step2) {
         Job job = jobBuilderFactory.get("job1")
+                .incrementer(new RunIdIncrementer())
                 .listener(jobExecutionListener)
                 .flow(step)
                 .next(step2)
@@ -154,25 +133,25 @@ public class BatchConfiguration {
 
         TaskletStep step = stepBuilderFactory.get("step1")
                 .<Tiempo, TiempoRiesgo>chunk(100)
-                .reader(tiempoReader())
+                .reader(reader())
                 .processor(processor)
                 .writer(writer)
-                .listener(readerListener)
-                .listener(tiempoItemProcessListener)
-                .listener(writerListener)
+                //.listener(readerListener)
+                //.listener(tiempoItemProcessListener)
+                //.listener(writerListener)
                 .build();
         return step;
     }
 
     //Guarda los errores encontrado en otro fichero csv
     @Bean
-    public Step step2(ErrorItemProcessor processor) {
+    public Step step2(ErrorItemProcessor processor, ErrorItemWriter writer) {
 
         TaskletStep step = stepBuilderFactory.get("step2")
                 .<Tiempo, ErrorTemperatura>chunk(100)
-                .reader(tiempoReader())
+                .reader(reader())
                 .processor(processor)
-                .writer(errorWriter())
+                .writer(writer)
                 .build();
         return step;
     }

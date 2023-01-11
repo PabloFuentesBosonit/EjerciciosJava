@@ -3,27 +3,39 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 public class TiempoRiesgo {
 
-    public static final int HIGH = 3;
-    public static final int LOW = 2;
-    public static final int NORMAL = 1;
+    public static final String HIGH = "Altas";
+    public static final String LOW = "Medias";
+    public static final String NORMAL = "Bajas";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    private String localidad;
     private String fecha;
-    private int riesgo;
+    private int temperatura;
+    private String anio;
+    private String mes;
+    private String dia;
+    private String riesgo;
 
     @OneToOne(cascade = CascadeType.ALL)
     Tiempo tiempo;
 
-    public TiempoRiesgo(String fecha, int riesgo, Tiempo tiempo) {
+    public TiempoRiesgo(String localidad, String fecha, int temperatura,
+                        String anio, String mes, String dia,
+                        String riesgo, Tiempo tiempo) {
+        this.localidad = localidad;
         this.fecha = fecha;
+        this.temperatura = temperatura;
+        this.anio = anio;
+        this.mes = mes;
+        this.dia = dia;
         this.riesgo = riesgo;
         this.tiempo = tiempo;
     }

@@ -11,9 +11,7 @@ public class TiempoItemProcessListener implements ItemProcessListener<Tiempo, Ti
     private static final Logger LOGGER = LoggerFactory.getLogger(TiempoItemProcessListener.class);
 
     @Override
-    public void beforeProcess(Tiempo tiempo) {
-        LOGGER.info("beforeProcess");
-    }
+    public void beforeProcess(Tiempo tiempo) {LOGGER.info("beforeProcess");}
 
     @Override
     public void afterProcess(Tiempo tiempo, TiempoRiesgo tiempoRiesgo) {

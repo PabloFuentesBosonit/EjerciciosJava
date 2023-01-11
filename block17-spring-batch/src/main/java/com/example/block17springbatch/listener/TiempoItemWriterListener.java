@@ -12,7 +12,6 @@ public class TiempoItemWriterListener implements ItemWriteListener<TiempoRiesgo>
 
     @Override
     public void beforeWrite(List<? extends TiempoRiesgo> list) {
-        LOGGER.info("beforeWrite");
     }
 
     @Override

@@ -11,17 +11,11 @@ public class TiempoItemReaderListener implements ItemReadListener<Tiempo> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TiempoJobExecutionListener.class);
 
     @Override
-    public void beforeRead()  {
-        LOGGER.info("beforeRead");
-    }
+    public void beforeRead(){}
 
     @Override
-    public void afterRead(Tiempo tiempo) {
-        LOGGER.info("afterRead: " + tiempo.toString());
-    }
+    public void afterRead(Tiempo tiempo) {LOGGER.info("afterRead: " + tiempo.toString());}
 
     @Override
-    public void onReadError(Exception e){
-        LOGGER.info("onReadError");
-    }
+    public void onReadError(Exception e){LOGGER.info("onReadError");}
 }
