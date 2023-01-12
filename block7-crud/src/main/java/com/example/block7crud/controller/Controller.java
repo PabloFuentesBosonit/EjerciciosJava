@@ -19,8 +19,7 @@ public class Controller {
 
     @PostMapping
     public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto person){
-        URI location = URI.create("/person");
-        return ResponseEntity.created(location).body(personService.addPerson(person));
+        return ResponseEntity.ok().body(personService.addPerson(person));
     }
 
     @GetMapping("/{id}")
@@ -51,10 +50,9 @@ public class Controller {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonOutputDto> updatePerson(@RequestBody PersonInputDto person) {
+    public ResponseEntity<PersonOutputDto> update(@RequestParam int id, @RequestBody PersonInputDto person) {
         try {
-            personService.getPersonById(person.getId());
-            return  ResponseEntity.ok().body(personService.addPerson(person));
+            return  ResponseEntity.ok().body(personService.updatePerson(person, id));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

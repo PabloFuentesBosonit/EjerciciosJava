@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonInputDto {
-    int id;
     String name;
     int age;
     String town;

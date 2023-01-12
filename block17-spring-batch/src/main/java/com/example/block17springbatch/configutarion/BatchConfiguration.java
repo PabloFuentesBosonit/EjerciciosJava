@@ -3,13 +3,10 @@ package com.example.block17springbatch.configutarion;
 import com.example.block17springbatch.domain.ErrorTemperatura;
 import com.example.block17springbatch.domain.Tiempo;
 import com.example.block17springbatch.domain.TiempoRiesgo;
+import com.example.block17springbatch.listener.*;
 import com.example.block17springbatch.steps.secondStep.ErrorItemProcessor;
 import com.example.block17springbatch.steps.firstStep.TiempoItemProcessor;
 import com.example.block17springbatch.steps.firstStep.TiempoItemWriter;
-import com.example.block17springbatch.listener.TiempoItemProcessListener;
-import com.example.block17springbatch.listener.TiempoItemReaderListener;
-import com.example.block17springbatch.listener.TiempoItemWriterListener;
-import com.example.block17springbatch.listener.TiempoJobExecutionListener;
 import com.example.block17springbatch.steps.secondStep.ErrorItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -106,6 +103,9 @@ public class BatchConfiguration {
         return new TiempoItemWriterListener();
     }
 
+    @Bean
+    public ErrorStepExecutionListener stepExecutionListener() {return new ErrorStepExecutionListener(); }
+
 
 
     // JOB configuration: esto es la automatización de los pasos
@@ -145,14 +145,21 @@ public class BatchConfiguration {
 
     //Guarda los errores encontrado en otro fichero csv
     @Bean
-    public Step step2(ErrorItemProcessor processor, ErrorItemWriter writer) {
+    public Step step2(ErrorItemProcessor processor, ErrorItemWriter writer, ErrorStepExecutionListener listener) {
 
         TaskletStep step = stepBuilderFactory.get("step2")
                 .<Tiempo, ErrorTemperatura>chunk(100)
+                //.faultTolerant()
+                //.skipLimit(40)
+                //.skip(Exception.class)
                 .reader(reader())
                 .processor(processor)
                 .writer(writer)
+                .listener(listener)
                 .build();
         return step;
     }
+
+
+
 }

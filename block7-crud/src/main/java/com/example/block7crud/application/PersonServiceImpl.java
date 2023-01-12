@@ -47,9 +47,14 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonOutputDto updatePerson(PersonInputDto person) {
-        personRepository.findById(person.getId()).orElseThrow();
-        return personRepository.save(new Person(person))
+    public PersonOutputDto updatePerson(PersonInputDto person, int id) {
+        Person person1 = personRepository.findById(id).orElseThrow();
+
+        person1.setName(person.getName());
+        person1.setAge(person.getAge());
+        person1.setTown(person.getTown());
+
+        return personRepository.save(person1)
                 .personToPersonOutputDto();
     }
 }

@@ -9,9 +9,9 @@ import java.util.Date;
 @Data
 public class TiempoRiesgo {
 
-    public static final String HIGH = "Altas";
-    public static final String LOW = "Medias";
-    public static final String NORMAL = "Bajas";
+    public static final String HIGH = "Alto";
+    public static final String LOW = "Medio";
+    public static final String NORMAL = "Bajo";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,7 @@ public class TiempoRiesgo {
     @OneToOne(cascade = CascadeType.ALL)
     Tiempo tiempo;
 
-    public TiempoRiesgo(String localidad, String fecha, int temperatura,
-                        String anio, String mes, String dia,
-                        String riesgo, Tiempo tiempo) {
+    public TiempoRiesgo(String localidad, String fecha, int temperatura, String anio, String mes, String dia, String riesgo, Tiempo tiempo) {
         this.localidad = localidad;
         this.fecha = fecha;
         this.temperatura = temperatura;

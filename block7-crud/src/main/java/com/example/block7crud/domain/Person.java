@@ -14,7 +14,6 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Person {
     @Id
     @GeneratedValue
@@ -24,7 +23,6 @@ public class Person {
     String town;
 
     public Person (PersonInputDto personInputDto){
-        this.id = personInputDto.getId();
         this.name = personInputDto.getName();
         this.age = personInputDto.getAge();
         this.town = personInputDto.getTown();

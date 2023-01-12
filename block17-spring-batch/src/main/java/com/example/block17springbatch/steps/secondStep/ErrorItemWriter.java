@@ -16,21 +16,17 @@ public class ErrorItemWriter extends FlatFileItemWriter<ErrorTemperatura> {
         //setResource(new FileSystemResource("src/main/resources/errors.csv"));
         setResource(new FileSystemResource("block17-spring-batch/src/main/resources/errors.csv"));
         setAppendAllowed(false);
-
         setHeaderCallback(new FlatFileHeaderCallback() {
             @Override
             public void writeHeader(Writer writer) throws IOException {
-                writer.write("Localidad, Temperatura, Fecha");
+                writer.write("Localidad, Fecha, Temperatura");
             }
         });
-        setLineAggregator(new DelimitedLineAggregator<ErrorTemperatura>(){
-            {
+        setLineAggregator(new DelimitedLineAggregator<ErrorTemperatura>(){{
                 setDelimiter(",");
-                setFieldExtractor(new BeanWrapperFieldExtractor<ErrorTemperatura>() {
-                {
+                setFieldExtractor(new BeanWrapperFieldExtractor<ErrorTemperatura>() {{
                     setNames(new String[] {"localidad", "fecha", "temperatura"});
-                }
-            });
+                }});
             }
         });
 

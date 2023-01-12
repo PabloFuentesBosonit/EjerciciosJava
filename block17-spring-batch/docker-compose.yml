@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=contrasena
+      - POSTGRES_DB=trip
+    ports:
+      - "5432:5432"
+    networks:
+      - batchnetwork
+  batch:
+    image: batch_image
+    build: ./block17-spring-batch
+    networks:
+      - batchnetwork
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+networks:
+  batchnetwork:
+    driver: bridge

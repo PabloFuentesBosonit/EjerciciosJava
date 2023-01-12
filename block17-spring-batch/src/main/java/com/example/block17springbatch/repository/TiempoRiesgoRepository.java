@@ -14,4 +14,5 @@ public interface TiempoRiesgoRepository extends JpaRepository<TiempoRiesgo, Inte
     @Query(value = "SELECT localidad, anio, COUNT(temperatura) as numeroMediciones, AVG(temperatura) as temperaturaMedia " +
             "FROM tiempo_Riesgo GROUP BY localidad, anio", nativeQuery = true)
     List<TiempoRiesgo> findListTiempoRiesgo();
+
 }
