@@ -68,6 +68,10 @@ CRUD, Endpoints, Exceptions, Connected entities, Feign
 ### JPA Cascade
 * [JPA Aplication](https://github.com/marta-pc/Marta-Pangusion-repo/tree/main/JPA-Cascade)
 
+
+
+### Spring Security
+* [Spring Security](https://github.com/marta-pc/Marta-Pangusion-repo/tree/main/SpringBatch)
  
 
 ### Spring Batch
